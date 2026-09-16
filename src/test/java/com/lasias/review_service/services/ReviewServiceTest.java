@@ -23,20 +23,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @Testcontainers
-class ReviewServiceTest {
-
-    @Container
-    static MySQLContainer mysql = new MySQLContainer("mysql:8.0")
-            .withDatabaseName("review_db_test")
-            .withUsername("tester")
-            .withPassword("tester");
-
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry){
-        registry.add("spring.datasource.url", mysql::getJdbcUrl);
-        registry.add("spring.datasource.username", mysql::getUsername);
-        registry.add("spring.datasource.password", mysql::getPassword);
-    }
+class ReviewServiceTest extends MySqlDatabaseConfig {
 
     @Autowired
     private ReviewService reviewService;
