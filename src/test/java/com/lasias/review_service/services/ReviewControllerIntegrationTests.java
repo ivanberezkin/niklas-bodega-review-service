@@ -25,22 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @Transactional
-public class ReviewControllerIntegrationTests {
-
-
-
-    @Container
-    static MySQLContainer mysql = new MySQLContainer("mysql:8.0")
-            .withDatabaseName("review_db_test")
-            .withUsername("tester")
-            .withPassword("tester");
-
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry){
-        registry.add("spring.datasource.url", mysql::getJdbcUrl);
-        registry.add("spring.datasource.username", mysql::getUsername);
-        registry.add("spring.datasource.password", mysql::getPassword);
-    }
+public class ReviewControllerIntegrationTests extends MySqlDatabaseConfig {
 
     @Autowired
     private MockMvc mockMvc;
