@@ -52,8 +52,9 @@ jobs:
     needs: build-and-push
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    container: ghcr.io/railwayapp/cli:latest
     steps:
       - name: Trigger Railway redeploy
-        run: npx -y @railway/cli@latest redeploy --service review-service --yes
+        run: railway redeploy --service niklas-bodega-review-service --yes
         env:
           RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN}}
