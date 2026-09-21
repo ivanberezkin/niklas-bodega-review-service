@@ -44,4 +44,6 @@ jobs:
         with:
             context: .
             push: true
-            tags: ${{ secrets.DOCKERHUB_USERNAME }}/review-service:latest
+            tags: |
+              ${{ secrets.DOCKERHUB_USERNAME }}/review-service:latest
+              ${{ secrets.DOCKERHUB_USERNAME }}/review-service:${{ github.run_number}}
