@@ -47,3 +47,13 @@ jobs:
             tags: |
               ${{ secrets.DOCKERHUB_USERNAME }}/review-service:latest
               ${{ secrets.DOCKERHUB_USERNAME }}/review-service:${{ github.run_number}}
+
+  redeploy-to-railway:
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Railway redeploy
+        run: npx -y @railway/cli@latest redeploy --service review-service --yes
+        env:
+          RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN}}
