@@ -1,6 +1,5 @@
 name: CI
 
-#comment to trigger CI
 
 on:
   push:
